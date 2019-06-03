@@ -30,7 +30,7 @@ To deploy Consul servers for production using this repo:
 
 * [install-dnsmasq module](https://github.com/arifurreza/devops_challenge_clark/tree/master/modules/install-dnsmasq): Install [Dnsmasq](http://www.thekelleys.org.uk/dnsmasq/doc.html)
   and configure it to forward requests for a specific domain to Consul. This allows you to use Consul as a DNS server
-  for URLs such as `foo.service.consul`.
+  for URLs such as `payment.service.consul`.
 
 * [consul-iam-policies](https://github.com/arifurreza/devops_challenge_clark/tree/master/modules/consul-iam-policies): Defines the IAM policies necessary for a Consul cluster. 
 
