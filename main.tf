@@ -39,9 +39,6 @@ data "aws_ami" "consul" {
 # ---------------------------------------------------------------------------------------------------------------------
 
 module "consul_servers" {
-  # When using these modules in your own templates, you will need to use a Git URL with a ref attribute that pins you
-  # to a specific version of the modules, such as the following example:
-  # source = "git::git@github.com:hashicorp/terraform-aws-consul.git//modules/consul-cluster?ref=v0.0.1"
   source = "./modules/consul-cluster"
 
   cluster_name  = "${var.cluster_name}-server"
@@ -59,8 +56,8 @@ module "consul_servers" {
   vpc_id     = "${data.aws_vpc.default.id}"
   subnet_ids = "${data.aws_subnet_ids.default.ids}"
 
-  # To make testing easier, we allow Consul and SSH requests from any IP address here but in a production
-  # deployment, we strongly recommend you limit this to the IP address ranges of known, trusted servers inside your VPC.
+  # To make testing easier, i allow Consul and SSH requests from any IP address here but in a production
+  # deployment, i strongly recommend you limit this to the IP address ranges of known, trusted servers inside your VPC.
   allowed_ssh_cidr_blocks = ["0.0.0.0/0"]
 
   allowed_inbound_cidr_blocks = ["0.0.0.0/0"]
@@ -91,15 +88,12 @@ data "template_file" "user_data_server" {
 
 # ---------------------------------------------------------------------------------------------------------------------
 # DEPLOY THE CONSUL CLIENT NODES
-# Note that you do not have to use the consul-cluster module to deploy your clients. We do so simply because it
+# Note that you do not have to use the consul-cluster module to deploy your clients. I do so simply because it
 # provides a convenient way to deploy an Auto Scaling Group with the necessary IAM and security group permissions for
 # Consul, but feel free to deploy those clients however you choose (e.g. a single EC2 Instance, a Docker cluster, etc).
 # ---------------------------------------------------------------------------------------------------------------------
 
 module "consul_clients" {
-  # When using these modules in your own templates, you will need to use a Git URL with a ref attribute that pins you
-  # to a specific version of the modules, such as the following example:
-  # source = "git::git@github.com:hashicorp/terraform-aws-consul.git//modules/consul-cluster?ref=v0.0.1"
   source = "./modules/consul-cluster"
 
   cluster_name  = "${var.cluster_name}-client"
@@ -116,8 +110,8 @@ module "consul_clients" {
   vpc_id     = "${data.aws_vpc.default.id}"
   subnet_ids = "${data.aws_subnet_ids.default.ids}"
 
-  # To make testing easier, we allow Consul and SSH requests from any IP address here but in a production
-  # deployment, we strongly recommend you limit this to the IP address ranges of known, trusted servers inside your VPC.
+  # To make testing easier, i allow Consul and SSH requests from any IP address here but in a production
+  # deployment, i strongly recommend you limit this to the IP address ranges of known, trusted servers inside your VPC.
   allowed_ssh_cidr_blocks = ["0.0.0.0/0"]
 
   allowed_inbound_cidr_blocks = ["0.0.0.0/0"]
@@ -141,7 +135,7 @@ data "template_file" "user_data_client" {
 # ---------------------------------------------------------------------------------------------------------------------
 # DEPLOY CONSUL IN THE DEFAULT VPC AND SUBNETS
 # Using the default VPC and subnets makes this example easy to run and test, but it means Consul is accessible from the
-# public Internet. For a production deployment, we strongly recommend deploying into a custom VPC with private subnets.
+# public Internet. For a production deployment, i strongly recommend deploying into a custom VPC with private subnets.
 # ---------------------------------------------------------------------------------------------------------------------
 
 data "aws_vpc" "default" {
