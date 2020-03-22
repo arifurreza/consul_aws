@@ -1,4 +1,4 @@
-# devops_challenge_clark
+# Consul AWS
 Automate the creation of a Consul cluster
 
 # Consul AWS Module
